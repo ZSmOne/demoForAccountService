@@ -3,10 +3,14 @@ package com.example.demo.Controller;
 
 import com.example.demo.dto.AccountDto;
 import com.example.demo.dto.AccountResponseDto;
+import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/accounts")
 public class AccountController {
 
-  @GetMapping("/1")
+  @GetMapping("/customer")
   public AccountResponseDto getAccounts(
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "30") int size,
-      @RequestParam(defaultValue = "string") String[] sort)
+      @RequestParam("customer_id") UUID customerId,
+//      @RequestParam(defaultValue = "0") int page,
+//      @RequestParam(defaultValue = "30") int size,
+//      @RequestParam(defaultValue = "string") String[] sort)
+      Pageable pageable)
 
   {
     AccountDto account1 = new AccountDto();
@@ -54,8 +60,8 @@ public class AccountController {
 
     AccountResponseDto response = new AccountResponseDto();
     response.setAccounts(accounts);
-    response.setPageNumber(page);
-    response.setPageSize(size);
+    response.setPageNumber(1);
+    response.setPageSize(10);
     response.setTotalElements(30);
 
     return response;
