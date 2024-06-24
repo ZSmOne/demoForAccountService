@@ -9,25 +9,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("/investment/api/v1")
 public class AccountController {
 
-  @GetMapping("/customer")
+  @GetMapping("/accounts")
   public AccountResponseDto getAccounts(
       @RequestParam("customer_id") UUID customerId,
-//      @RequestParam(defaultValue = "0") int page,
-//      @RequestParam(defaultValue = "30") int size,
-//      @RequestParam(defaultValue = "string") String[] sort)
-      Pageable pageable)
-
-  {
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "30") int size
+//      @RequestParam(defaultValue = "string") Sort sort
+      //Pageable pageable
+  ) {
     AccountDto account1 = new AccountDto();
     account1.setId("00000000-0000-0000-0000-0000000003f5");
     account1.setCustomerId("c1c12bfb-ee07-42ee-9171-b705cebd6309");
